@@ -30,14 +30,15 @@ label_encoder = preprocessing.LabelEncoder()
 df["Sex"] = label_encoder.fit_transform(df["Sex"])
 print(df.head())
 
-X = df[["Pclass", "Sex", "Age", "Fare", "Embarked", "TravelAlone"]]
+X = df[["Pclass", "Sex", "Age", "Fare", "Embarked_Q","Embarked_S", "TravelAlone"]]
 Y = df["Survived"]
 
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=2)
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
-X_test = scaler.transform(X_train )
+X_test = scaler.transform(X_test )
 from sklearn.linear_model import LogisticRegression
 lr_model = LogisticRegression()
 lr_model.fit(X_train,Y_train)
